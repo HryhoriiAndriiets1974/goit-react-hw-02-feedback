@@ -5,7 +5,7 @@ import './index.css';
 
 class Counter extends Component {
   static defaultProps = {
-    step: 1,
+    step: 10,
     initialValue: 0,
   };
 
@@ -14,20 +14,16 @@ class Counter extends Component {
   };
 
   handleIncrement = () => {
-    this.setState(prevState => {
-      return {
-        value: prevState.value + 1,
-      }
-    })
+    this.setState((state, props) => ({
+        value: state.value + props.step,
+    }))
   };
 
 
   handleDecrement = () => {
-    this.setState(prevState => {
-      return {
-        value: prevState.value - 1,
-      }
-    })
+    this.setState((state, props) => ({
+        value: state.value - props.step,
+    }))
   };
 
   render() {
