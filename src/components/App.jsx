@@ -3,12 +3,19 @@ import Section from "./Section";
 import Statistics from "./Statistics";
 import FeedbackOptions from "./FeedbackOptions";
 import Notification from "./Notification/Notification";
+import Logo from "./Logo/Logo";
 
 class App extends Component {
+  static defaultProps = {
+    initialgood: 0,
+    initialneutral: 0,
+    initialbad: 0,
+  }
+
   state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+    good: this.props.initialgood,
+    neutral: this.props.initialneutral,
+    bad: this.props.initialbad,
   };
 
 countTotalFeedback() {
@@ -28,12 +35,14 @@ onLeaveFeedback = e => {
 
   render () {
     const {good, neutral, bad} = this.state;
-    const options = Object.keys(this.state);
+    const total = this.countTotalFeedback();
+    const positivPercentage = this.countPositiveFeedbackPercentage();
     return (
     <>
+      <Logo />
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={options}
+          options={['good', 'neutral', 'bad']}
           onLeaveFeedback={this.onLeaveFeedback}
         />
       </Section>
@@ -44,8 +53,8 @@ onLeaveFeedback = e => {
             good={good}
             neutral={neutral}
             bad={bad}
-            total={this.countTotalFeedback()}
-            positivPercentage={this.countPositiveFeedbackPercentage()}
+            total={total}
+            positivPercentage={positivPercentage}
           />)
         : (<Notification message="There is no feedback" />)
         }
