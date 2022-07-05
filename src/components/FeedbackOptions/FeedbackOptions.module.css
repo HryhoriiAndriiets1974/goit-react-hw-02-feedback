@@ -13,9 +13,12 @@
   flex-direction: row;
   margin-right: 15px;
   border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .btn:hover {
   cursor: pointer;
+  background-color: aquamarine;
+  transform: translateY(-2px);
 
 }
